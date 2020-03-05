@@ -3,17 +3,17 @@ class Sort {
 	/**
 	 *
 	 * Сортировка массива пузырьком
- 	 * @param array - несортированный массив
+	 * @param array - несортированный массив
 	 * @returns {array} - сортированный массив
 	 */
-	static bubbleSort(array) {
+	bubbleSort(array) {
 		let endSortFlag = false;
 		while (!endSortFlag) {
 			endSortFlag = true;
 			for (let index = 0; index < array.length - 1; index++) { // не .forEach, так как for быстрее.
 				if (array[index] > array[index + 1]) {
 					endSortFlag = false;
-					[array[index], array[index+1]] = [array[index+1], array[index]]; //деструктивное присваивание, свап значений.
+					[array[index], array[index + 1]] = [array[index + 1], array[index]]; //деструктивное присваивание, свап значений.
 
 
 				}
@@ -29,7 +29,7 @@ class Sort {
 	 * @param array - несортированный массив
 	 * @returns {array} - сортированный массив
 	 */
-	static selectSort(array) {
+	selectSort(array) {
 		let minValueIndex;
 		for (let index = 0; index < array.length - 1; index++) {
 			minValueIndex = index;
@@ -48,7 +48,7 @@ class Sort {
 	 * @param array
 	 * @returns {array}
 	 */
-	insertSort(array){
+	insertSort(array) {
 
 		array.forEach((item, index) => {
 			let insertElement = array[index], j = index - 1;
@@ -69,7 +69,7 @@ class Sort {
 	 * @param array
 	 * @returns {*}
 	 */
-	static shellSort(array){
+	shellSort(array) {
 		let gap = Math.floor(array.length / 2);
 		while (gap >= 1) {
 			for (let i = gap; i < array.length; i++) {
@@ -91,7 +91,7 @@ class Sort {
 	 * @param array
 	 * @returns {Array}
 	 */
-	static countSort(array) {
+	countSort(array) {
 		let n = array.length,
 			count = new Array(n).fill(0),
 			newArray = [];
@@ -111,7 +111,7 @@ class Sort {
 	 * @param array
 	 * @returns {*}
 	 */
-	static combSort(array) {
+	combSort(array) {
 		const factor = 1.247;
 		let gapFactor = array.length / factor;
 		while (gapFactor > 1) {
@@ -132,20 +132,16 @@ class Sort {
 	 * @param array
 	 * @returns {*}
 	 */
-	mergeSort(array){
+	mergeSort(array) {
 		const merge = (arrFirst, arrSecond) => { // функция объединения двух массивов
 			const arrSort = [];
 			let index = 0,
 				j = 0;
 
 			while (index < arrFirst.length && j < arrSecond.length) {
-				arrSort.push( (arrFirst[index] < arrSecond[j]) ? arrFirst[index++] : arrSecond[j++] );
+				arrSort.push((arrFirst[index] < arrSecond[j]) ? arrFirst[index++] : arrSecond[j++]);
 			}
-			return [
-				...arrSort,
-				...arrFirst.slice(index),
-				...arrSecond.slice(j)
-			];
+			return [...arrSort, ...arrFirst.slice(index), ...arrSecond.slice(j)];
 		};
 
 		if (array.length <= 1) { // конец рекурсии
@@ -162,7 +158,7 @@ class Sort {
 	 * @param array
 	 * @returns {*}
 	 */
-	quickSort(array){
+	quickSort(array) {
 		if (array.length <= 1) {
 			return array
 		}
@@ -170,13 +166,13 @@ class Sort {
 			smaller = [], // массив элементов меньше опорного
 			bigger = []; // массив элементов больше опорного
 
-		for(let index = 1; index<array.length; index++){
-			if(array[index] > supporting)
+		for (let index = 1; index < array.length; index++) {
+			if (array[index] > supporting)
 				bigger.push(array[index]);
 			else
 				smaller.push(array[index]);
 
-			console.log(bigger, smaller)
+
 		}
 
 		return ([...this.quickSort(smaller), supporting, ...this.quickSort(bigger)])
@@ -185,6 +181,14 @@ class Sort {
 
 }
 
-let b = [1, 4, 3, 2];
+let b = [1, 4, 3, 2,7];
 let a = new Sort();
 console.log(a.quickSort(b));
+console.log(a.bubbleSort(b));
+console.log(a.selectSort(b));
+console.log(a.insertSort(b));
+console.log(a.shellSort(b));
+console.log(a.combSort(b));
+console.log(a.mergeSort(b));
+console.log(a.combSort(b));
+console.log(a.countSort(b));
